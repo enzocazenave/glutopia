@@ -21,7 +21,7 @@ export const Sidebar = () => {
       </div>
 
       <div className="flex items-center gap-2 hover:bg-slate-50 hover:cursor-pointer p-2 rounded-md transition-colors">
-        <img src="./user.png" className="w-6 h-6 rounded-full object-cover" />
+        <img src="/user.png" className="w-6 h-6 rounded-full object-cover" />
         <span>Enzo Cazenave</span>
       </div>
     </aside>

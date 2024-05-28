@@ -4,6 +4,10 @@ import { Bookmark, FilledBookmark, Star } from "../Icons"
 export const RestaurantCard = ({ restaurant }) => {
   const navigate = useNavigate()
 
+  const handleNavigateRestaurantPage = () => {
+    navigate(`/restaurante/${restaurant.id}`, { state: restaurant })
+  }
+
   return (
     <div 
       style={{ 
@@ -12,7 +16,7 @@ export const RestaurantCard = ({ restaurant }) => {
         backgroundSize: 'cover'
       }}
       className="p-3 rounded-md flex flex-col gap-16 hover:opacity-90 hover:cursor-pointer hover:scale-[1.01] transition-all"
-      onClick={() => navigate(`/restaurante/${restaurant.id}`)}
+      onClick={handleNavigateRestaurantPage}
     >
       <div className="flex justify-end">
         <button className="bg-transparent">
