@@ -1,6 +1,9 @@
-import { Bookmark, Star } from "../Icons"
+import { useNavigate } from "react-router-dom"
+import { Bookmark, FilledBookmark, Star } from "../Icons"
 
 export const RestaurantCard = ({ restaurant }) => {
+  const navigate = useNavigate()
+
   return (
     <div 
       style={{ 
@@ -8,11 +11,12 @@ export const RestaurantCard = ({ restaurant }) => {
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
-      className="p-3 rounded-md flex flex-col gap-16 hover:opacity-80 hover:cursor-pointer"
+      className="p-3 rounded-md flex flex-col gap-16 hover:opacity-90 hover:cursor-pointer hover:scale-[1.01] transition-all"
+      onClick={() => navigate(`/restaurante/${restaurant.id}`)}
     >
       <div className="flex justify-end">
         <button className="bg-transparent">
-          <Bookmark width={20} color="#fff" />
+          {restaurant.saved ? <FilledBookmark width={20} color="#fff" /> : <Bookmark width={20} color="#fff" />}
         </button>
       </div>
 
@@ -21,7 +25,7 @@ export const RestaurantCard = ({ restaurant }) => {
         
         <div className="flex gap-2">
           <span className="text-white text-opacity-60 font-medium">{ restaurant.commentaries} comentarios - </span>
-          <Star width={16} color="#fff" />
+          <Star width={16} color="#bbb" />
           <span className="text-white text-opacity-60 font-medium">{ restaurant.stars }</span>
         </div>
       </div>

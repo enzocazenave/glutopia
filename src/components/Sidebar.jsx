@@ -7,9 +7,15 @@ export const Sidebar = () => {
         <h2 className="text-2xl font-semibold mb-4">Glutopía<span className="text-[0.4em]"> DEMO</span></h2>
         <nav>
           <ul className="flex flex-col gap-2">
-            <NavLink to="/" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-colors`}>Inicio</NavLink>
-            <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-colors`}>Comunidad</NavLink>
-            <NavLink to="/mapa" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-colors`}>Mapa</NavLink>
+            <NavLink to="/" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+              Inicio
+            </NavLink>
+            <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+              Comunidad
+            </NavLink>
+            <NavLink to="/mapa" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+              Mapa
+            </NavLink>
           </ul>
         </nav>
       </div>
