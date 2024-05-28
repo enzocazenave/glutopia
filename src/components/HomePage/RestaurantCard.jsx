@@ -28,7 +28,7 @@ export const RestaurantCard = ({ restaurant }) => {
         <h3 className="text-white font-semibold">{ restaurant.name }</h3>
         
         <div className="flex gap-2">
-          <span className="text-white text-opacity-60 font-medium">{ restaurant.commentaries} comentarios - </span>
+          <span className="text-white text-opacity-60 font-medium">{ restaurant.comments} comentarios - </span>
           <Star width={16} color="#bbb" />
           <span className="text-white text-opacity-60 font-medium">{ restaurant.stars }</span>
         </div>

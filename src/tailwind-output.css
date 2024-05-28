@@ -579,8 +579,8 @@ video {
   display: grid;
 }
 
-.h-8 {
-  height: 2rem;
+.h-6 {
+  height: 1.5rem;
 }
 
 .h-96 {
@@ -591,20 +591,12 @@ video {
   height: 100vh;
 }
 
-.h-6 {
-  height: 1.5rem;
-}
-
-.w-8 {
-  width: 2rem;
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-6 {
-  width: 1.5rem;
 }
 
 .max-w-\[1280px\] {
@@ -647,28 +639,24 @@ video {
   justify-content: space-between;
 }
 
-.gap-10 {
-  gap: 2.5rem;
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-16 {
+  gap: 4rem;
 }
 
 .gap-2 {
   gap: 0.5rem;
 }
 
+.gap-3 {
+  gap: 0.75rem;
+}
+
 .gap-4 {
   gap: 1rem;
-}
-
-.gap-12 {
-  gap: 3rem;
-}
-
-.gap-14 {
-  gap: 3.5rem;
-}
-
-.gap-16 {
-  gap: 4rem;
 }
 
 .rounded-full {
@@ -687,23 +675,6 @@ video {
   background-color: transparent;
 }
 
-.bg-slate-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-}
-
-.bg-cover {
-  background-size: cover;
-}
-
-.bg-center {
-  background-position: center;
-}
-
-.bg-bottom {
-  background-position: bottom;
-}
-
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -717,34 +688,14 @@ video {
   padding: 0.75rem;
 }
 
-.p-12 {
-  padding: 3rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.pt-40 {
-  padding-top: 10rem;
-}
-
-.pt-32 {
-  padding-top: 8rem;
-}
-
-.pt-16 {
-  padding-top: 4rem;
-}
-
-.pt-24 {
-  padding-top: 6rem;
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pt-28 {
@@ -756,13 +707,29 @@ video {
   line-height: 2rem;
 }
 
+.text-\[0\.3em\] {
+  font-size: 0.3em;
+}
+
 .text-\[0\.4em\] {
   font-size: 0.4em;
 }
 
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-\[0\.5em\] {
+  font-size: 0.5em;
+}
+
+.text-\[0\.7em\] {
+  font-size: 0.7em;
+}
+
+.text-\[0\.75em\] {
+  font-size: 0.75em;
 }
 
 .font-medium {
@@ -773,48 +740,26 @@ video {
   font-weight: 600;
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.text-opacity-60 {
-  --tw-text-opacity: 0.6;
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-opacity-30 {
   --tw-text-opacity: 0.3;
 }
 
-.text-opacity-20 {
-  --tw-text-opacity: 0.2;
-}
-
 .text-opacity-50 {
   --tw-text-opacity: 0.5;
 }
 
-.text-opacity-40 {
-  --tw-text-opacity: 0.4;
-}
-
-.transition-colors {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+.text-opacity-60 {
+  --tw-text-opacity: 0.6;
 }
 
 .transition-all {
@@ -823,8 +768,8 @@ video {
   transition-duration: 150ms;
 }
 
-.transition-transform {
-  transition-property: transform;
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -850,23 +795,6 @@ video {
 
 .hover\:font-semibold:hover {
   font-weight: 600;
-}
-
-.hover\:text-red-500:hover {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
-.hover\:opacity-50:hover {
-  opacity: 0.5;
-}
-
-.hover\:opacity-70:hover {
-  opacity: 0.7;
-}
-
-.hover\:opacity-80:hover {
-  opacity: 0.8;
 }
 
 .hover\:opacity-90:hover {

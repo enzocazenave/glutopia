@@ -1,5 +1,6 @@
 import { useParams, useLocation } from 'react-router-dom'
-import { MapPin, Star } from '../components'
+import { Bookmark, Comments, MapPin, Star } from '../components'
+import { MessageCircle } from '../components/Icons/MessageCircle'
 
 export const RestaurantPage = () => {
   const { restaurantId } = useParams()
@@ -7,12 +8,21 @@ export const RestaurantPage = () => {
 
   return (
     <section>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h3 className="font-semibold">{currentRestaurant.name}</h3>
+
+        <div className="flex gap-3">
+          <button>
+            <MessageCircle width={20} />
+          </button>
+          <button>
+            <Bookmark width={20} />
+          </button>
+        </div>
       </div>
 
       <div className="flex gap-2">
-        <span className="text-black text-opacity-50 font-medium">{currentRestaurant.commentaries} comentarios - </span>
+        <span className="text-black text-opacity-50 font-medium">{currentRestaurant.comments} comentarios - </span>
         <Star width={16} color="#bbb" />
         <span className="text-black text-opacity-50 font-medium">{currentRestaurant.stars}</span>
       </div>
@@ -32,6 +42,7 @@ export const RestaurantPage = () => {
       </div>
 
       <h3 className="font-medium mt-4">Comentarios de los usuarios</h3>
+      <Comments />
     </section>
   )
 }
