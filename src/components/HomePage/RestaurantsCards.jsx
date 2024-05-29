@@ -2,7 +2,8 @@ import { RestaurantCard } from "./"
 
 const restaurants = [
   { 
-    id: 1, name: "Nombre del comercio", 
+    id: 1, 
+    name: "Gluresto", 
     comments: 15, 
     stars: 4.5, 
     saved: false, 
@@ -11,7 +12,7 @@ const restaurants = [
   },
   { 
     id: 2, 
-    name: "Nombre del comercio", 
+    name: "La Farolita", 
     comments: 12, stars: 3, 
     saved: true, 
     srcImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/640px-Restaurant_N%C3%A4sinneula.jpg',
@@ -19,7 +20,7 @@ const restaurants = [
   },
   { 
     id: 3, 
-    name: "Nombre del comercio", 
+    name: "La Parolaccia", 
     comments: 17, 
     stars: 2.5, 
     saved: false, 
