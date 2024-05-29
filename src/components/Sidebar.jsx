@@ -4,7 +4,7 @@ export const Sidebar = () => {
   return (
     <aside className="flex flex-col justify-between">
       <div>
-        <h2 className="text-2xl font-semibold mb-4">Glutopía<span className="text-[0.4em]"> DEMO</span></h2>
+        <h1 className="text-2xl font-semibold mb-4">Glutopía<span className="text-[0.4em]"> DEMO</span></h1>
         <nav>
           <ul className="flex flex-col gap-2">
             <NavLink to="/" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>

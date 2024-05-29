@@ -1,22 +1,33 @@
 import { useParams, useLocation } from 'react-router-dom'
-import { Bookmark, Comments, MapPin, Star } from '../components'
-import { MessageCircle } from '../components/Icons/MessageCircle'
+import { Bookmark, Comments, MapPin, Modal, Star, MessageCircle, CommentModal, FilledBookmark } from '../components'
+import { useModal } from '../hooks'
+import { useState } from 'react'
 
 const RestaurantPage = () => {
+  const { handleCloseModal: handleCloseCommentModal, isModalOpen: isCommentModalOpen, handleOpenModal: handleOpenCommentModal } = useModal(false)
   const { restaurantId } = useParams()
   const { state: currentRestaurant } = useLocation()
+  const [saved, setSaved] = useState(currentRestaurant.saved)
+
+  const handleSaveRestaurant = () => {
+    setSaved((prevState) => !prevState)
+  }
 
   return (
     <section>
+      <Modal isModalOpen={isCommentModalOpen} handleCloseModal={handleCloseCommentModal}>
+        <CommentModal currentRestaurant={currentRestaurant} />
+      </Modal>
+
       <div className="flex justify-between items-center">
         <h3 className="font-semibold">{currentRestaurant.name}</h3>
 
         <div className="flex gap-3">
-          <button>
+          <button onClick={handleOpenCommentModal} className="outline-none" title="Comentar">
             <MessageCircle width={20} />
           </button>
-          <button>
-            <Bookmark width={20} />
+          <button onClick={handleSaveRestaurant} className="outline-none" title="Guardar">
+            { saved ? <FilledBookmark width={20} /> : <Bookmark width={20} /> }
           </button>
         </div>
       </div>

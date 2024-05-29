@@ -1,11 +1,18 @@
 import { useNavigate } from "react-router-dom"
 import { Bookmark, FilledBookmark, Star } from "../Icons"
+import { useState } from "react"
 
 export const RestaurantCard = ({ restaurant }) => {
   const navigate = useNavigate()
+  const [saved, setSaved] = useState(restaurant.saved)
 
   const handleNavigateRestaurantPage = () => {
     navigate(`/restaurante/${restaurant.id}`, { state: restaurant })
+  }
+
+  const handleSaveRestaurant = (e) => {
+    e.stopPropagation()
+    setSaved((prevState) => !prevState)
   }
 
   return (
@@ -19,8 +26,8 @@ export const RestaurantCard = ({ restaurant }) => {
       onClick={handleNavigateRestaurantPage}
     >
       <div className="flex justify-end">
-        <button className="bg-transparent">
-          {restaurant.saved ? <FilledBookmark width={20} color="#fff" /> : <Bookmark width={20} color="#fff" />}
+        <button className="bg-transparent" onClick={handleSaveRestaurant} title="Guardar">
+          {saved ? <FilledBookmark width={20} color="#fff" /> : <Bookmark width={20} color="#fff" />}
         </button>
       </div>
 
