@@ -1,6 +1,6 @@
 import { RestaurantFilters, RestaurantsCards } from "../components"
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <section>
       <RestaurantFilters />
@@ -8,3 +8,5 @@ export const HomePage = () => {
     </section>
   )
 }
+
+export default HomePage

@@ -20,10 +20,10 @@ export const Sidebar = () => {
         </nav>
       </div>
 
-      <div className="flex items-center gap-2 hover:bg-slate-50 hover:cursor-pointer p-2 rounded-md transition-colors">
+      <NavLink to="/cuenta" className={({ isActive }) => `${isActive ? 'bg-slate-100' : ''} flex items-center gap-2 hover:bg-slate-50 hover:cursor-pointer p-2 rounded-md transition-colors`} >
         <img src="/user.png" className="w-6 h-6 rounded-full object-cover" />
         <span>Enzo Cazenave</span>
-      </div>
+      </NavLink>
     </aside>
   )
 }

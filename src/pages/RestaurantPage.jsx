@@ -2,7 +2,7 @@ import { useParams, useLocation } from 'react-router-dom'
 import { Bookmark, Comments, MapPin, Star } from '../components'
 import { MessageCircle } from '../components/Icons/MessageCircle'
 
-export const RestaurantPage = () => {
+const RestaurantPage = () => {
   const { restaurantId } = useParams()
   const { state: currentRestaurant } = useLocation()
 
@@ -33,7 +33,7 @@ export const RestaurantPage = () => {
           backgroundPosition: 'center',
           backgroundSize: 'cover'
         }}
-        className="p-3 mt-4 rounded-md"
+        className="p-3 mt-4 rounded-md shadow-lg"
       >
         <div className="flex gap-2 items-end">
           <MapPin width={20} color="#fff" />
@@ -46,3 +46,5 @@ export const RestaurantPage = () => {
     </section>
   )
 }
+
+export default RestaurantPage

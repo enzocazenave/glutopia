@@ -15,7 +15,7 @@ export const RestaurantCard = ({ restaurant }) => {
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
-      className="p-3 rounded-md flex flex-col gap-16 hover:opacity-90 hover:cursor-pointer hover:scale-[1.01] transition-all"
+      className="p-3 rounded-md flex flex-col gap-16 hover:opacity-90 hover:cursor-pointer hover:scale-[1.01] transition-all shadow-lg"
       onClick={handleNavigateRestaurantPage}
     >
       <div className="flex justify-end">
