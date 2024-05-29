@@ -19,3 +19,8 @@ npm run dev
 ```
 pnpm run dev
 ```
+
+### To start tailwind compiler 
+```
+npx tailwind -i ./src/tailwind-input.css -o ./src/tailwind-output.css --watch
+```
