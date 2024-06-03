@@ -1,5 +1,5 @@
 import { Button, Textarea } from "../"
-import { Send } from "../Icons/Send"
+import { Send } from "../Icons/"
 
 export const CommentModal = ({ currentRestaurant }) => {
   return (

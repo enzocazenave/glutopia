@@ -4,7 +4,7 @@ import { Sidebar, AdsSpace, Modal, LoginModal, RegisterModal } from "./"
 
 export const Layout = ({ children }) => {
   const { handleCloseModal: handleCloseLoginModal, isModalOpen: isLoginModalOpen } = useModal(false)
-  const { handleCloseModal: handleCloseRegisterModal, isModalOpen: isRegisterModalOpen } = useModal(true)
+  const { handleCloseModal: handleCloseRegisterModal, isModalOpen: isRegisterModalOpen } = useModal(false)
 
   return (
     <main className="grid grid-cols-[16rem_auto_20rem] max-w-[1280px] mx-auto py-4 gap-4 h-screen px-4">

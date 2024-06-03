@@ -4,7 +4,7 @@ import { Button, Input } from "../"
 export const LoginModal = () => {
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-2xl text-center">Glutopía</h3>
+      <img className="max-w-44 mx-auto" src="/logo.png" />
       <h2 className="text-2xl font-semibold text-center">Iniciar Sesión</h2>
       <p className="text-center text-pretty">Para disfrutar Glutopia al máximo requerimos de que inicies sesión. Accedé a la comunidad y aportá a la Comunidad Celíaca.</p>
 

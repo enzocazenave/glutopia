@@ -13,7 +13,7 @@ export const RestaurantFilters = () => {
           <option value="default" disabled>Filtro por reseñas</option>
         </select>
 
-        <button className="flex items-center gap-2 p-2 flex-1 border rounded-md justify-center hover:bg-slate-50 transition-colors">
+        <button className="flex items-center gap-2 p-2 flex-1 border rounded-md justify-center hover:bg-green-100 transition-colors bg-white">
           <FilledBookmark width={20} />
           Guardados
         </button>
