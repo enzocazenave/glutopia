@@ -11,6 +11,7 @@ const HomePage = lazy(() => import('../pages/HomePage'))
 const RestaurantPage = lazy(() => import('../pages/RestaurantPage'))
 const CommunityPage = lazy(() => import('../pages/CommunityPage'))
 const MapPage = lazy(() => import('../pages/MapPage'))
+const FrequentQuestionsPage = lazy(() => import ('../pages/FrequentQuestionsPage'))
 const SuggestRestaurantPage = lazy(() => import('../pages/SuggestRestaurantPage'))
 const UserPage = lazy(() => import('../pages/UserPage'))
 
@@ -26,6 +27,8 @@ export const Router = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/restaurante/:restaurantId" element={<RestaurantPage />} />
           <Route path="/mapa" element={<MapPage />} />
+          <Route path="/preguntas" element={<FrequentQuestionsPage />} />
+
           { status === AuthConstants.AUTHENTICATED ? (
             <>
               <Route 

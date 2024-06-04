@@ -12,22 +12,26 @@ export const Sidebar = () => {
         <img className="mb-4 max-w-44" src="/logo.png" />
         <nav>
           <ul className="flex flex-col gap-2">
-            <NavLink to="/" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+            <NavLink to="/" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all`}>
               Inicio
             </NavLink>
 
-            <NavLink to="/mapa" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+            <NavLink to="/mapa" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all `}>
               Mapa
+            </NavLink>
+
+            <NavLink to="/preguntas" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all `}>
+              Preguntas frecuentes
             </NavLink>
             
             {
               status === AuthConstants.AUTHENTICATED
                 ? (
                   <>
-                    <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+                    <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all `}>
                       Comunidad
                     </NavLink>
-                    <NavLink to="/sugerir" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+                    <NavLink to="/sugerir" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all `}>
                       Sugerir restaurante
                     </NavLink>
                   </>
