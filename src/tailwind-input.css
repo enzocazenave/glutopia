@@ -5,3 +5,34 @@
 * {
   font-family: 'Montserrat', sans-serif;
 }
+
+.fade-in {
+  animation: fade-in .5s;
+}
+
+.fade-in-more {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 7px; 
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(74,222,128);
+  border-radius: 5px;
+}

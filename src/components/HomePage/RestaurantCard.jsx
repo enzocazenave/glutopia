@@ -2,17 +2,31 @@ import { useNavigate } from "react-router-dom"
 import { Bookmark, FilledBookmark, Star } from "../Icons"
 import { useState } from "react"
 
-export const RestaurantCard = ({ restaurant }) => {
+export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
   const navigate = useNavigate()
-  const [saved, setSaved] = useState(false)
-
-  const handleNavigateRestaurantPage = () => {
-    navigate(`/restaurante/${restaurant.idRestaurante}`, { state: restaurant })
-  }
+  const restaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
+  const isRestaurantSaved = restaurantsSaved.includes(restaurant.idRestaurante)
+  const [_, setReRender] = useState(false)
 
   const handleSaveRestaurant = (e) => {
     e.stopPropagation()
-    setSaved((prevState) => !prevState)
+
+    const currentRestaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
+    let updatedRestaurantsSaved
+
+    if (isRestaurantSaved) {
+      updatedRestaurantsSaved = currentRestaurantsSaved.filter(id => id !== restaurant.idRestaurante)
+    } else {
+      updatedRestaurantsSaved = [...currentRestaurantsSaved, restaurant.idRestaurante]
+    }
+    
+    window.localStorage.setItem('restaurants-saved', JSON.stringify(updatedRestaurantsSaved))
+    setReRender(prev => !prev)
+    setExecuteEffect(prev => !prev) 
+  }
+
+  const handleNavigateRestaurantPage = () => {
+    navigate(`/restaurante/${restaurant.idRestaurante}`, { state: {...restaurant, isRestaurantSaved} })
   }
 
   return (
@@ -27,7 +41,7 @@ export const RestaurantCard = ({ restaurant }) => {
     >
       <div className="flex justify-end">
         <button className="bg-transparent" onClick={handleSaveRestaurant} title="Guardar">
-          {saved ? <FilledBookmark width={20} color="#fff" /> : <Bookmark width={20} color="#fff" />}
+          {isRestaurantSaved ? <FilledBookmark width={20} color="#fff" /> : <Bookmark width={20} color="#fff" />}
         </button>
       </div>
 

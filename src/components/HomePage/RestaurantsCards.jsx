@@ -1,15 +1,15 @@
-import { useRestaurant } from "../../hooks/useRestaurants"
-import { Loading } from "../"
 import { RestaurantCard } from "./"
 
-export const RestaurantsCards = () => {
-
-  const { restaurants, loading } = useRestaurant()
-
+export const RestaurantsCards = ({ restaurants, setExecuteEffect }) => {
   return (
     <div className="mt-4 flex flex-col gap-2">
-      { loading ? <Loading /> : null }
-      {restaurants.map(restaurant => <RestaurantCard key={restaurant.idRestaurante} restaurant={restaurant} />)}
+      {restaurants.map(restaurant => (
+        <RestaurantCard 
+          key={restaurant.idRestaurante} 
+          restaurant={restaurant} 
+          setExecuteEffect={setExecuteEffect}
+        />
+      ))}
     </div>
   )
 }

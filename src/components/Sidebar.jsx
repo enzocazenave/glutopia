@@ -15,19 +15,25 @@ export const Sidebar = () => {
             <NavLink to="/" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
               Inicio
             </NavLink>
-            {
-              status === AuthConstants.AUTHENTICATED
-                ? (
-                  <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
-                    Comunidad
-                  </NavLink>
-                )
-                : null
-            }
 
             <NavLink to="/mapa" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
               Mapa
             </NavLink>
+            
+            {
+              status === AuthConstants.AUTHENTICATED
+                ? (
+                  <>
+                    <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+                      Comunidad
+                    </NavLink>
+                    <NavLink to="/sugerir" className={({ isActive }) => `${isActive ? 'font-semibold' : ''} hover:font-semibold transition-all`}>
+                      Sugerir restaurante
+                    </NavLink>
+                  </>
+                )
+                : null
+            }
           </ul>
         </nav>
       </div>
@@ -37,7 +43,7 @@ export const Sidebar = () => {
           ? (
             <NavLink to="/cuenta" className={({ isActive }) => `${isActive ? 'bg-slate-100' : ''} flex items-center gap-2 hover:bg-green-100 hover:cursor-pointer p-2 rounded-md transition-colors`} >
               <img src="/user.png" className="w-6 h-6 rounded-full object-cover" />
-              <span>{ user.nombre }</span>
+              <span>{user.nombre}</span>
             </NavLink>
           )
           : <Button className="w-fit" onClick={handleOpenLoginModal}>Iniciar sesión</Button>

@@ -10,11 +10,23 @@ const RestaurantPage = () => {
   const { handleOpenLoginModal, status } = useContext(AuthContext)
   const { handleCloseModal: handleCloseCommentModal, isModalOpen: isCommentModalOpen, handleOpenModal: handleOpenCommentModal } = useModal(false)
   const { state: currentRestaurant } = useLocation()
-  const [saved, setSaved] = useState(false)
   const { getReseniasPorRestaurant, fetchResenias } = useResenias()
+  const restaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
+  const isRestaurantSaved = restaurantsSaved.includes(currentRestaurant.idRestaurante)
+  const [_, setReRender] = useState(false)
 
   const handleSaveRestaurant = () => {
-    setSaved((prevState) => !prevState)
+    const currentRestaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
+    let updatedRestaurantsSaved
+
+    if (isRestaurantSaved) {
+      updatedRestaurantsSaved = currentRestaurantsSaved.filter(id => id !== currentRestaurant.idRestaurante)
+    } else {
+      updatedRestaurantsSaved = [...currentRestaurantsSaved, currentRestaurant.idRestaurante]
+    }
+    
+    window.localStorage.setItem('restaurants-saved', JSON.stringify(updatedRestaurantsSaved))
+    setReRender(prev => !prev)
   }
 
   const handleOpenCommentModalIfLogin = () => {
@@ -30,7 +42,7 @@ const RestaurantPage = () => {
   }
 
   return (
-    <section>
+    <section className="fade-in">
       <Modal isModalOpen={isCommentModalOpen} handleCloseModal={handleCloseCommentModal}>
         <CommentModal resetComments={handleResetComments} handleCloseModal={handleCloseCommentModal} currentRestaurant={currentRestaurant} />
       </Modal>
@@ -43,7 +55,7 @@ const RestaurantPage = () => {
             <MessageCircle width={20} />
           </button>
           <button onClick={handleSaveRestaurant} className="outline-none" title="Guardar">
-            { saved ? <FilledBookmark width={20} /> : <Bookmark width={20} /> }
+            { isRestaurantSaved ? <FilledBookmark width={20} /> : <Bookmark width={20} /> }
           </button>
         </div>
       </div>

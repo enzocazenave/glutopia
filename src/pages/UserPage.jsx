@@ -13,7 +13,7 @@ const UserPage = () => {
   }
 
   return (
-    <section>
+    <section className="fade-in">
       <div className="flex justify-between items-center">
         <h3 className="font-semibold">Tu cuenta</h3>
         <Button onClick={handleLogout}>Cerrar sesión</Button>

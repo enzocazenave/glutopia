@@ -1,7 +1,11 @@
+import { useContext } from 'react'
 import { Star } from '../'
 import { dateHelpers } from '../../helpers'
+import { AuthContext } from '../../context/AuthContext'
 
 export const Comment = ({ comment }) => {
+  const { user } = useContext(AuthContext)
+
   const renderStars = (numStars) => {
     const stars = []
 
@@ -21,7 +25,7 @@ export const Comment = ({ comment }) => {
       <div className="flex flex-col w-full">
         <div className="flex justify-between">
           <div>
-            <h4>{comment.usuario.nombre}</h4>
+            <h4>{comment.usuario.idUsuario === user.idUsuario ? 'Tú' : comment.usuario.nombre}</h4>
             <div className="flex gap-1">
               {renderStars(comment.puntuacion)}
             </div>
