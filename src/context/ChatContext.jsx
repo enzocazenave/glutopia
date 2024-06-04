@@ -66,7 +66,8 @@ export const ChatProvider = ({ children }) => {
       scrollToBottom()
     } else {
       setMessages(prevMessages => [...prevMessages, payload.new])
-      setUnviewedMessagesCount(prev => prev + 1)
+      scrollToBottom()
+      //setUnviewedMessagesCount(prev => prev + 1)
     }
   }
 
