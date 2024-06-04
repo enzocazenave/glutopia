@@ -4,10 +4,10 @@ import { useState } from "react"
 
 export const RestaurantCard = ({ restaurant }) => {
   const navigate = useNavigate()
-  const [saved, setSaved] = useState(restaurant.saved)
+  const [saved, setSaved] = useState(false)
 
   const handleNavigateRestaurantPage = () => {
-    navigate(`/restaurante/${restaurant.id}`, { state: restaurant })
+    navigate(`/restaurante/${restaurant.idRestaurante}`, { state: restaurant })
   }
 
   const handleSaveRestaurant = (e) => {
@@ -18,7 +18,7 @@ export const RestaurantCard = ({ restaurant }) => {
   return (
     <div 
       style={{ 
-        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${restaurant.srcImage})`,
+        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${restaurant.foto})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
@@ -32,12 +32,12 @@ export const RestaurantCard = ({ restaurant }) => {
       </div>
 
       <div>
-        <h3 className="text-white font-semibold">{ restaurant.name }</h3>
+        <h3 className="text-white font-semibold">{ restaurant.nombreRestaurante }</h3>
         
         <div className="flex gap-2">
-          <span className="text-white text-opacity-60 font-medium">{ restaurant.comments} comentarios - </span>
+          <span className="text-white text-opacity-60 font-medium">{ restaurant.reseniasTotales} comentarios - </span>
           <Star width={16} color="#bbb" />
-          <span className="text-white text-opacity-60 font-medium">{ restaurant.stars }</span>
+          <span className="text-white text-opacity-60 font-medium">{ restaurant.puntuacionPromedio }</span>
         </div>
       </div>
     </div>

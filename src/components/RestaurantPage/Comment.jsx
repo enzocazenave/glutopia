@@ -18,18 +18,18 @@ export const Comment = ({ comment }) => {
     <div className="flex rounded-md border p-3 gap-3">
       <img src="/user.png" className="w-6 h-6" />
 
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <div className="flex justify-between">
           <div>
-            <h4>{comment.name}</h4>
+            <h4>{comment.usuario.nombre}</h4>
             <div className="flex gap-1">
-              {renderStars(comment.stars)}
+              {renderStars(comment.puntuacion)}
             </div>
           </div>
-          <span className="text-[0.75em]">{ dateHelpers.getTimeAgo(comment.created_at) }</span>
+          <span className="text-[0.75em]">{ dateHelpers.getTimeAgo(new Date(comment.fecha)) }</span>
         </div>
 
-        <p className="text-xs">{comment.text}</p>
+        <p className="text-xs">{comment.comentario}</p>
       </div>
     </div>
   )

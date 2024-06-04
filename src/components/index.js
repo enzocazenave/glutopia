@@ -1,6 +1,7 @@
 export * from './Layout'
 export * from './Sidebar'
 export * from './AdsSpace'
+export * from './Loading'
 
 export * from './DesignSystem'
 export * from './Icons'
