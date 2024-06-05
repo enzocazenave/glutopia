@@ -42,7 +42,7 @@ const RestaurantPage = () => {
   }
 
   return (
-    <section className="fade-in">
+    <section className="fade-in overflow-hidden flex flex-col gap-1">
       <Modal isModalOpen={isCommentModalOpen} handleCloseModal={handleCloseCommentModal}>
         <CommentModal resetComments={handleResetComments} handleCloseModal={handleCloseCommentModal} currentRestaurant={currentRestaurant} />
       </Modal>
