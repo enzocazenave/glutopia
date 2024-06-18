@@ -16,7 +16,9 @@ export const ChatProvider = ({ children }) => {
     joinChat()
 
     return () => {
-      if (chatChannel) supabase.removeChannel(chatChannel)
+      if (chatChannel) {
+        supabase.removeChannel(chatChannel)
+      }
     }
   }, [])
 
@@ -30,7 +32,11 @@ export const ChatProvider = ({ children }) => {
     if (messages.length) return
     
     try {
-      const { data, error } = await supabase.from('chat_messages').select().range(0, 49).order('id', { ascending: false })
+      const { data, error } = await supabase
+        .from('chat_messages')
+        .select('id, created_at, user_id, message, users(name)')
+        //.range(0, 49)
+        .order('id', { ascending: false })
 
       if (error) {
         return toast.error('Ocurrió un error inesperado')
@@ -48,7 +54,11 @@ export const ChatProvider = ({ children }) => {
       await getInitialConversations()
       setChatChannel(
         supabase.channel('realtime-chat')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'chat_messages' }, (payload) => { handleNewMessage(payload) })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'chat_messages' }, (payload) => {
+            supabase.from('users').select('name').eq('id', payload.new.user_id).single().then(({ data: users }) => {
+              handleNewMessage({ ...payload.new, users })
+            })
+          })
           .subscribe()
       )
     } catch(error) {
@@ -58,10 +68,10 @@ export const ChatProvider = ({ children }) => {
 
   const handleNewMessage = (payload) => {
     if ((scrollRef.current.scrollTop + scrollRef.current.clientHeight === scrollRef.current.scrollHeight) || payload.new.user_id === user.idUsuario) {
-      setMessages(prevMessages => [...prevMessages, payload.new])
+      setMessages(prevMessages => [...prevMessages, payload])
       scrollToBottom()
     } else {
-      setMessages(prevMessages => [...prevMessages, payload.new])
+      setMessages(prevMessages => [...prevMessages, payload])
       scrollToBottom()
       //setUnviewedMessagesCount(prev => prev + 1)
     }

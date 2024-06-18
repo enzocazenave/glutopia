@@ -2,6 +2,7 @@ import { Button, Input } from "../DesignSystem"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { useForm } from "../../hooks"
+import supabase from "../../supabaseClient"
 
 const initialForm = {
   email: '',
@@ -26,34 +27,18 @@ export const RegisterModal = () => {
     }
 
     try {
-      const response = await fetch(
-        'http://localhost:8081/auth/register',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            email,
-            contraseña: password,
-            nombre: name + ' ' + surname,
-            dieta: '',
-            ubicacion: 'CABA'
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        }
-      )
+      const { data, error } = await supabase.auth.signUp({ email, password })
 
-      const data = await response.json()
-
-      if (data.status === 403) {
+      if (error) {
         toast.error('Credenciales incorrectas')
         return
       }
 
-      const responseUser = await fetch(`http://localhost:8081/usuarios/get/${data.userId}`)
-      const dataUser = await responseUser.json()
+      await supabase.from('users').insert([
+        { id: data.user.id, name: `${name} ${surname}`, email }
+      ])
 
-      login({ ...dataUser, ...data })
+      login(data.user.id)
     } catch (error) {
       console.log(error)
     }

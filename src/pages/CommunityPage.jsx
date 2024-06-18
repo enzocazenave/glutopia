@@ -26,7 +26,7 @@ const CommunityPage = () => {
 
     try { 
       const { error } = await supabase.from('chat_messages').insert([
-        { message, user_name: user.nombre, user_id: user.idUsuario }
+        { message, user_id: user.id }
       ])
 
       if (error) {
@@ -47,28 +47,28 @@ const CommunityPage = () => {
           <FilledStar width={16} />
           Mensajes destacados
         </button>
-        <div className="flex items-center gap-2">
+        {/*<div className="flex items-center gap-2">
           <div className="rounded-full bg-green-400 w-3 h-3"></div>
-          <span>50 usuarios en línea</span>
-        </div>
+          <span>{4} usuarios en línea</span>
+        </div>*/}
       </header>
 
       <main ref={scrollRef} className="flex-1 gap-4 border rounded-md p-4 flex flex-col overflow-auto h-full fade-in-more relative">
         { messages.map(chatMessage => {
-          if (chatMessage.user_id === user.idUsuario) {
+          if (chatMessage.user_id === user.id) {
             return <OutgoingMessage key={chatMessage.id} message={chatMessage.message} sent_at={chatMessage.created_at} />
           }
 
-          return <IncomingMessage key={chatMessage.id} name={chatMessage.user_name} imgSrc="/user.png" message={chatMessage.message} sent_at={chatMessage.created_at} />
+          return <IncomingMessage key={chatMessage.id} name={chatMessage.users.name} imgSrc="/user.png" message={chatMessage.message} sent_at={chatMessage.created_at} />
         })}
       </main>
 
       <footer>
         <form onSubmit={handleSend} className="flex gap-3">
           <Input onChange={onInputChange} value={message} name="message" placeholder="Escriba su mensaje" className="flex-1" />
-          <button className="flex items-center px-3 border rounded-md justify-center hover:bg-green-100 transition-colors bg-white">
+          {/*<button className="flex items-center px-3 border rounded-md justify-center hover:bg-green-100 transition-colors bg-white">
             <Photo width={16} />
-          </button>
+          </button>*/}
           <button type="submit" disabled={isSending} className="flex items-center px-3 border rounded-md justify-center hover:bg-green-100 transition-colors bg-white">
             <Send width={20} />
           </button>

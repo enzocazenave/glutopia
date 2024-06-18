@@ -26,7 +26,7 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
   }
 
   const handleNavigateRestaurantPage = () => {
-    navigate(`/restaurante/${restaurant.id}`, { state: {...restaurant, isRestaurantSaved} })
+    navigate(`/restaurante/${restaurant.id}`)
   }
 
   return (
@@ -49,9 +49,9 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
         <h3 className="text-white font-semibold">{ restaurant.name }</h3>
         
         <div className="flex gap-2">
-          <span className="text-white text-opacity-60 font-medium">{ 4 } comentarios - </span>
+          <span className="text-white text-opacity-60 font-medium">{ restaurant.reviews_count } comentarios - </span>
           <Star width={16} color="#bbb" />
-          <span className="text-white text-opacity-60 font-medium">{ 4 }</span>
+          <span className="text-white text-opacity-60 font-medium">{ restaurant.reviews_average.toFixed(2) }</span>
         </div>
       </div>
     </div>

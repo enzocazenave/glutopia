@@ -3,12 +3,13 @@ import { Loading, RestaurantFilters, RestaurantsCards } from "../components"
 import { useForm, useRestaurant } from "../hooks"
 
 const initialForm = {
-  name: ''
+  name: '',
+  valoration: 'better'
 }
 
 const HomePage = () => {
   const { restaurants, loading } = useRestaurant()
-  const { name, onInputChange } = useForm(initialForm)
+  const { name, valoration, onInputChange } = useForm(initialForm)
   const [savedFilter, setSavedFilter] = useState(false)
   const [executeEffect, setExecuteEffect] = useState(false)
   let restaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
@@ -19,16 +20,30 @@ const HomePage = () => {
 
   let filteredResults = restaurants.filter(
     restaurant => {
-      return savedFilter 
+      return savedFilter
         ? (restaurant.name.toLowerCase().startsWith(name.toLowerCase()) && restaurantsSaved.includes(restaurant.id))
         : restaurant.name.toLowerCase().startsWith(name.toLowerCase())
     }
   )
-  
+
+  filteredResults.sort((a, b) => {
+    if (valoration === 'better') {
+      return b.reviews_average - a.reviews_average;
+    } else {
+      return a.reviews_average - b.reviews_average;
+    }
+  })
+
   return (
-    <section className="fade-in">
+    <section className="fade-in row-span-1">
       { loading ? <Loading /> : null }
-      <RestaurantFilters savedFilter={savedFilter} setSavedFilter={setSavedFilter} value={name} onChange={onInputChange} />
+      <RestaurantFilters 
+        savedFilter={savedFilter} 
+        setSavedFilter={setSavedFilter} 
+        valueName={name}
+        valueValoration={valoration}
+        onChange={onInputChange} 
+      />
       <RestaurantsCards restaurants={filteredResults} setExecuteEffect={setExecuteEffect} />
     </section>
   )

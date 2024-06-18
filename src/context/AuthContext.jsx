@@ -2,13 +2,12 @@ import { useState, createContext, useEffect } from "react"
 import { LoginModal, Modal, RegisterModal } from "../components"
 import { useModal } from '../hooks'
 import toast from "react-hot-toast"
+import supabase from "../supabaseClient"
 
 export const AuthConstants = {
   AUTHENTICATED: 'authenticated',
   NOT_AUTHENTICATED: 'not_authenticated',
   CHECKING: 'checking',
-  TOKEN_LOCAL_STORAGE_KEY: 'token',
-  USER_LOCAL_STORAGE_KEY: 'userId'
 }
 
 export const AuthContext = createContext({})
@@ -17,53 +16,51 @@ export const AuthProvider = ({ children }) => {
   const { handleCloseModal: handleCloseLoginModal, isModalOpen: isLoginModalOpen, handleOpenModal: handleOpenLoginModal } = useModal(false)
   const { handleCloseModal: handleCloseRegisterModal, isModalOpen: isRegisterModalOpen, handleOpenModal: handleOpenRegisterModal } = useModal(false)
 
-  const [status, setStatus] = useState(AuthConstants.NOT_AUTHENTICATED)
+  const [status, setStatus] = useState(AuthConstants.CHECKING)
   const [user, setUser] = useState({})
 
   useEffect(() => {
-    validateToken()
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+
+      if (!session) {
+        return await logout(true)
+      }
+
+      const currentTime = Math.floor(Date.now() / 1000)
+
+      if (session.expires_at && session.expires_at < currentTime) {
+        return await logout(true)
+      }
+
+      await login(session.user.id)
+    }
+
+    checkSession()
   }, [])
 
-  const login = (user, validation = false) => {
-    setStatus(AuthConstants.AUTHENTICATED)
-    setUser(user)
-
-    if (!validation) {
-      window.localStorage.setItem(AuthConstants.TOKEN_LOCAL_STORAGE_KEY, user.token)
-      window.localStorage.setItem(AuthConstants.USER_LOCAL_STORAGE_KEY, user.userId)
-    }
-
-    if (isLoginModalOpen || isRegisterModalOpen) {
-      handleCloseRegisterModal()
-      handleCloseLoginModal()
-      toast((c) => <span>Bienvenido a <b>Glutopía</b> {user.nombre}!</span>, { duration: 7000, icon: '👋' })
-    }
-  }
-  
-  const validateToken = async() => {
-    const userId = window.localStorage.getItem(AuthConstants.USER_LOCAL_STORAGE_KEY)
-
-    if (
-      !window.localStorage.getItem(AuthConstants.TOKEN_LOCAL_STORAGE_KEY) || 
-      !userId
-    ) {
-      return logout(true)
-    }
-    
+  const login = async (id) => {
     try {
-      const responseUser = await fetch(`http://localhost:8081/usuarios/get/${userId}`)
-      const data = await responseUser.json()
-
-      login(data, true)
+      setStatus(AuthConstants.AUTHENTICATED)
+      const { data, error } = await supabase.from('users').select().eq('id', id).single()
+      if (error) throw error
+      setUser(data)
+  
+      if (isLoginModalOpen || isRegisterModalOpen) {
+        handleCloseRegisterModal()
+        handleCloseLoginModal()
+        toast((c) => <span>Bienvenido a <b>Glutopía</b> {data.name}!</span>, { duration: 7000, icon: '👋' })
+      }
     } catch(error) {
-      console.log(error)
+      console.error("Error fetching user data:", error)
+      setStatus(AuthConstants.NOT_AUTHENTICATED)
     }
   }
 
-  const logout = (withValidation = false) => {
+  const logout = async (withValidation = false) => {
+    await supabase.auth.signOut()
+    setUser({})
     setStatus(AuthConstants.NOT_AUTHENTICATED)
-    window.localStorage.removeItem(AuthConstants.TOKEN_LOCAL_STORAGE_KEY)
-    window.localStorage.removeItem(AuthConstants.USER_LOCAL_STORAGE_KEY)
     
     if (!withValidation) {
       toast.success('Has cerrado sesión', { duration: 7000 })
@@ -81,7 +78,6 @@ export const AuthProvider = ({ children }) => {
         handleOpenRegisterModal,
         handleCloseLoginModal,
         handleCloseRegisterModal,
-        validateToken
       }}
     >
       <Modal isModalOpen={isLoginModalOpen} handleCloseModal={handleCloseLoginModal}>

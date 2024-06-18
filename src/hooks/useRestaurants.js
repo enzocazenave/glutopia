@@ -12,14 +12,14 @@ export const useRestaurant = () => {
   const fetchRestaurants = async () => {
     try {
       setLoading(true)
-      const { data, error } = await supabase.from('restaurants').select()
+      const { data, error } = await supabase.rpc('get_restaurants')
 
       if (error) {
         return console.log(error)
       }
 
       setRestaurants(data)
-    } catch(error) {
+    } catch (error) {
       console.log(error)
     } finally {
       setLoading(false)

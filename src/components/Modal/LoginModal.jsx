@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { useForm } from "../../hooks"
 import toast from "react-hot-toast"
+import supabase from "../../supabaseClient"
 
 const initialForm = {
   email: '',
@@ -24,31 +25,14 @@ export const LoginModal = () => {
     }
       
     try {
-      const response = await fetch(
-        'http://localhost:8081/auth/login',
-        { 
-          method: 'POST', 
-          body: JSON.stringify({
-            email,
-            contraseña: password
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        }
-      )
+      const { data, error } = await supabase.auth.signInWithPassword({ password, email })
 
-      const data = await response.json()
-
-      if (data.status === 403) {
+      if (error) {
         toast.error('Credenciales incorrectas')
         return
       }
 
-      const responseUser = await fetch(`http://localhost:8081/usuarios/get/${data.userId}`)
-      const dataUser = await responseUser.json()
-
-      login({ ...dataUser, ...data })
+      login(data.user.id)
     } catch(error) {
       console.log(error)
     }

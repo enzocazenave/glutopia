@@ -24,7 +24,7 @@ export const CommentModal = ({ currentRestaurant, handleCloseModal, resetComment
 
     try {
       const { error } = await supabase.from('reviews').insert([
-        { user_id: user.idUsuario, restaurant_id: restaurantId, stars: rating, comment: message }
+        { user_id: user.id, restaurant_id: restaurantId, stars: rating, comment: message }
       ])
 
       if (error) {

@@ -25,8 +25,7 @@ export const Comment = ({ comment }) => {
       <div className="flex flex-col w-full">
         <div className="flex justify-between">
           <div>
-            {/*<h4>{comment.usuario.idUsuario === user.idUsuario ? 'Tú' : comment.usuario.nombre}</h4>*/}
-            <h4>Tu</h4>
+            <h4>{comment.user_id === user.id ? 'Tú' : comment.users.name}</h4>
             <div className="flex gap-1">
               {renderStars(comment.stars)}
             </div>

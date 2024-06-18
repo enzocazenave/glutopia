@@ -9,9 +9,8 @@ const MAP_DEFAULTS_SETTINGS = {
   mapTypeControl: false,
   fullscreenControl: false,
   streetViewControl: false,
-  defaultZoom: 14,
+  defaultZoom: 13.5,
   defaultCenter: { lat: -34.6126481, lng: -58.3618743 },
-  styles: []
 }
 
 const MapPage = () => {
