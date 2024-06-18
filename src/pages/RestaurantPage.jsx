@@ -1,8 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { Bookmark, Comments, MapPin, Modal, Star, MessageCircle, CommentModal, FilledBookmark } from '../components'
 import { useModal } from '../hooks'
-import { useState } from 'react'
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import { AuthConstants, AuthContext } from '../context/AuthContext'
 import { useResenias } from '../hooks/useResenias'
 
@@ -10,9 +9,9 @@ const RestaurantPage = () => {
   const { handleOpenLoginModal, status } = useContext(AuthContext)
   const { handleCloseModal: handleCloseCommentModal, isModalOpen: isCommentModalOpen, handleOpenModal: handleOpenCommentModal } = useModal(false)
   const { state: currentRestaurant } = useLocation()
-  const { getReseniasPorRestaurant, fetchResenias } = useResenias()
+  const { fetchResenias, resenias } = useResenias(currentRestaurant.id)
   const restaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
-  const isRestaurantSaved = restaurantsSaved.includes(currentRestaurant.idRestaurante)
+  const isRestaurantSaved = restaurantsSaved.includes(currentRestaurant.id)
   const [_, setReRender] = useState(false)
 
   const handleSaveRestaurant = () => {
@@ -20,9 +19,9 @@ const RestaurantPage = () => {
     let updatedRestaurantsSaved
 
     if (isRestaurantSaved) {
-      updatedRestaurantsSaved = currentRestaurantsSaved.filter(id => id !== currentRestaurant.idRestaurante)
+      updatedRestaurantsSaved = currentRestaurantsSaved.filter(id => id !== currentRestaurant.id)
     } else {
-      updatedRestaurantsSaved = [...currentRestaurantsSaved, currentRestaurant.idRestaurante]
+      updatedRestaurantsSaved = [...currentRestaurantsSaved, currentRestaurant.id]
     }
     
     window.localStorage.setItem('restaurants-saved', JSON.stringify(updatedRestaurantsSaved))
@@ -48,7 +47,7 @@ const RestaurantPage = () => {
       </Modal>
 
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold">{currentRestaurant.nombreRestaurante}</h3>
+        <h3 className="font-semibold">{currentRestaurant.name}</h3>
 
         <div className="flex gap-3">
           <button onClick={handleOpenCommentModalIfLogin} className="outline-none" title="Comentar">
@@ -61,14 +60,14 @@ const RestaurantPage = () => {
       </div>
 
       <div className="flex gap-2">
-        <span className="text-black text-opacity-50 font-medium">{currentRestaurant.reseniasTotales} comentarios - </span>
+        <span className="text-black text-opacity-50 font-medium">{4} comentarios - </span>
         <Star width={16} color="#bbb" />
-        <span className="text-black text-opacity-50 font-medium">{currentRestaurant.puntuacionPromedio}</span>
+        <span className="text-black text-opacity-50 font-medium">{4}</span>
       </div>
 
       <div 
         style={{ 
-          background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${currentRestaurant.foto})`,
+          background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${currentRestaurant.photo_url})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover'
         }}
@@ -76,12 +75,12 @@ const RestaurantPage = () => {
       >
         <div className="flex gap-2 items-center pt-28">
           <MapPin width={16} color="#fff" />
-          <h3 className="text-white font-semibold text-pretty text-sm">{ currentRestaurant.direccion }, { currentRestaurant.ciudad }, { currentRestaurant.provincia }</h3>
+          <h3 className="text-white font-semibold text-pretty text-sm">{ currentRestaurant.address }</h3>
         </div>
       </div>
 
       <h3 className="font-medium mt-4">Comentarios de los usuarios</h3>
-      <Comments comments={getReseniasPorRestaurant(currentRestaurant.idRestaurante)} />
+      <Comments comments={resenias} />
     </section>
   )
 }

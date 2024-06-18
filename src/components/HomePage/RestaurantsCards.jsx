@@ -5,7 +5,7 @@ export const RestaurantsCards = ({ restaurants, setExecuteEffect }) => {
     <div className="mt-4 flex flex-col gap-2">
       {restaurants.map(restaurant => (
         <RestaurantCard 
-          key={restaurant.idRestaurante} 
+          key={restaurant.id} 
           restaurant={restaurant} 
           setExecuteEffect={setExecuteEffect}
         />

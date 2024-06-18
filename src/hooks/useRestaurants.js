@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import supabase from "../supabaseClient"
 
 export const useRestaurant = () => {
   const [restaurants, setRestaurants] = useState([])
@@ -12,8 +12,11 @@ export const useRestaurant = () => {
   const fetchRestaurants = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:8081/restaurante/getAll')
-      const data = await response.json()
+      const { data, error } = await supabase.from('restaurants').select()
+
+      if (error) {
+        return console.log(error)
+      }
 
       setRestaurants(data)
     } catch(error) {

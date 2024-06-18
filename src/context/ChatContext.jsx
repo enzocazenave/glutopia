@@ -1,11 +1,7 @@
-import { useState } from "react";
-import { createContext } from "react";
-import supabase from "../supabaseClient";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { useRef } from "react";
-import { useContext } from "react";
-import { AuthContext } from "./AuthContext";
+import { useState, createContext, useEffect, useContext, useRef } from "react"
+import supabase from "../supabaseClient"
+import toast from "react-hot-toast"
+import { AuthContext } from "./AuthContext"
 
 export const ChatContext = createContext({})
 

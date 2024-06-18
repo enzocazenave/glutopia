@@ -1,23 +1,22 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import supabase from "../supabaseClient"
 
-export const useResenias = () => {
+export const useResenias = (restaurantId) => {
   const [resenias, setResenias] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     fetchResenias()
-  }, [])
-
-  const getReseniasPorRestaurant = (id) => {
-    return resenias.filter(restaurant => restaurant.restaurante.idRestaurante === id)
-  } 
+  }, [restaurantId])
 
   const fetchResenias = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:8081/resenia/getAll')
-      const data = await response.json()
+      const { data, error } = await supabase.from('reviews').select('*').eq('restaurant_id', restaurantId)
+
+      if (error) {
+        return console.log(error)
+      }
 
       setResenias(data.reverse())
     } catch(error) {
@@ -30,7 +29,6 @@ export const useResenias = () => {
   return {
     resenias,
     loading,
-    getReseniasPorRestaurant,
     fetchResenias
   }
 }

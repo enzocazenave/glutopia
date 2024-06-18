@@ -1,7 +1,6 @@
-import { useState, createContext } from "react"
+import { useState, createContext, useEffect } from "react"
 import { LoginModal, Modal, RegisterModal } from "../components"
 import { useModal } from '../hooks'
-import { useEffect } from "react"
 import toast from "react-hot-toast"
 
 export const AuthConstants = {

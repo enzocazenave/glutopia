@@ -25,15 +25,16 @@ export const Comment = ({ comment }) => {
       <div className="flex flex-col w-full">
         <div className="flex justify-between">
           <div>
-            <h4>{comment.usuario.idUsuario === user.idUsuario ? 'Tú' : comment.usuario.nombre}</h4>
+            {/*<h4>{comment.usuario.idUsuario === user.idUsuario ? 'Tú' : comment.usuario.nombre}</h4>*/}
+            <h4>Tu</h4>
             <div className="flex gap-1">
-              {renderStars(comment.puntuacion)}
+              {renderStars(comment.stars)}
             </div>
           </div>
-          <span className="text-[0.75em]">{ dateHelpers.getTimeAgo(new Date(comment.fecha)) }</span>
+          <span className="text-[0.75em]">{ dateHelpers.getTimeAgo(new Date(comment.created_at)) }</span>
         </div>
 
-        <p className="text-xs">{comment.comentario}</p>
+        <p className="text-xs">{comment.comment}</p>
       </div>
     </div>
   )

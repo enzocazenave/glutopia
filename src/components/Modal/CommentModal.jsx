@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom"
 import { Button, Textarea } from "../"
 import { Send, Star } from "../Icons/"
 import { useForm } from "../../hooks"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import toast from "react-hot-toast"
-import { useState } from "react"
+import supabase from "../../supabaseClient"
 
 const initialForm = {
   message: ''
@@ -23,28 +23,14 @@ export const CommentModal = ({ currentRestaurant, handleCloseModal, resetComment
     }
 
     try {
-      const response = await fetch(
-        'http://localhost:8081/resenia/crear', 
-        { 
-          method: 'POST', 
-          body: JSON.stringify({
-            usuario: {
-              idUsuario: user.idUsuario
-            },
-            restaurante: {
-              idRestaurante: restaurantId
-            },
-            puntuacion: rating,
-            comentario: message,
-            fecha: new Date().toISOString()
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        }
-      )
+      const { error } = await supabase.from('reviews').insert([
+        { user_id: user.idUsuario, restaurant_id: restaurantId, stars: rating, comment: message }
+      ])
 
-      const responseData = await response.json()
+      if (error) {
+        return console.log(error)
+      }
+
       resetComments()
       toast.success('Tu comentario fue subido con éxito', { duration: 7000 })
       handleCloseModal()

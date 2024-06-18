@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Loading, RestaurantFilters, RestaurantsCards } from "../components"
 import { useForm, useRestaurant } from "../hooks"
-import { useEffect } from "react"
 
 const initialForm = {
   name: ''
@@ -21,8 +20,8 @@ const HomePage = () => {
   let filteredResults = restaurants.filter(
     restaurant => {
       return savedFilter 
-        ? (restaurant.nombreRestaurante.toLowerCase().startsWith(name.toLowerCase()) && restaurantsSaved.includes(restaurant.idRestaurante))
-        : restaurant.nombreRestaurante.toLowerCase().startsWith(name.toLowerCase())
+        ? (restaurant.name.toLowerCase().startsWith(name.toLowerCase()) && restaurantsSaved.includes(restaurant.id))
+        : restaurant.name.toLowerCase().startsWith(name.toLowerCase())
     }
   )
   

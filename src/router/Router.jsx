@@ -1,10 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Layout } from '../components/'
-import { lazy } from 'react'
-import { Navigate } from 'react-router-dom'
-import { AuthConstants, AuthContext, AuthProvider } from '../context/AuthContext'
+import { lazy, useContext } from 'react'
+import { AuthConstants, AuthContext } from '../context/AuthContext'
 import { Toaster } from 'react-hot-toast'
-import { useContext } from 'react'
 import { ChatProvider } from '../context/ChatContext'
 
 const HomePage = lazy(() => import('../pages/HomePage'))

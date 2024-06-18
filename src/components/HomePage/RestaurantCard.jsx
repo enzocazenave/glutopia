@@ -5,7 +5,7 @@ import { useState } from "react"
 export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
   const navigate = useNavigate()
   const restaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
-  const isRestaurantSaved = restaurantsSaved.includes(restaurant.idRestaurante)
+  const isRestaurantSaved = restaurantsSaved.includes(restaurant.id)
   const [_, setReRender] = useState(false)
 
   const handleSaveRestaurant = (e) => {
@@ -15,24 +15,24 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
     let updatedRestaurantsSaved
 
     if (isRestaurantSaved) {
-      updatedRestaurantsSaved = currentRestaurantsSaved.filter(id => id !== restaurant.idRestaurante)
+      updatedRestaurantsSaved = currentRestaurantsSaved.filter(id => id !== restaurant.id)
     } else {
-      updatedRestaurantsSaved = [...currentRestaurantsSaved, restaurant.idRestaurante]
+      updatedRestaurantsSaved = [...currentRestaurantsSaved, restaurant.id]
     }
     
     window.localStorage.setItem('restaurants-saved', JSON.stringify(updatedRestaurantsSaved))
     setReRender(prev => !prev)
-    setExecuteEffect(prev => !prev) 
+    setExecuteEffect(prev => !prev)
   }
 
   const handleNavigateRestaurantPage = () => {
-    navigate(`/restaurante/${restaurant.idRestaurante}`, { state: {...restaurant, isRestaurantSaved} })
+    navigate(`/restaurante/${restaurant.id}`, { state: {...restaurant, isRestaurantSaved} })
   }
 
   return (
     <div 
       style={{ 
-        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${restaurant.foto})`,
+        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${restaurant.photo_url})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
@@ -46,12 +46,12 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
       </div>
 
       <div>
-        <h3 className="text-white font-semibold">{ restaurant.nombreRestaurante }</h3>
+        <h3 className="text-white font-semibold">{ restaurant.name }</h3>
         
         <div className="flex gap-2">
-          <span className="text-white text-opacity-60 font-medium">{ restaurant.reseniasTotales} comentarios - </span>
+          <span className="text-white text-opacity-60 font-medium">{ 4 } comentarios - </span>
           <Star width={16} color="#bbb" />
-          <span className="text-white text-opacity-60 font-medium">{ restaurant.puntuacionPromedio }</span>
+          <span className="text-white text-opacity-60 font-medium">{ 4 }</span>
         </div>
       </div>
     </div>
