@@ -54,7 +54,7 @@ const CommunityPage = () => {
       </header>
 
       <main ref={scrollRef} className="flex-1 gap-4 border rounded-md p-4 flex flex-col overflow-auto h-full fade-in-more relative">
-        { messages.map(chatMessage => {
+        { messages?.map(chatMessage => {
           if (chatMessage.user_id === user.id) {
             return <OutgoingMessage key={chatMessage.id} message={chatMessage.message} sent_at={chatMessage.created_at} />
           }
