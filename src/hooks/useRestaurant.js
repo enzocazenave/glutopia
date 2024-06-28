@@ -34,7 +34,7 @@ export const useRestaurant = (restaurantId) => {
     try {
       setLoading(true)
       const { data: restaurant, error: errorWhenFetchingRestaurant } = await supabase
-        .rpc('get_restaurants')
+        .rpc('get_restaurants_full_data')
         .select()
         .eq('id', restaurantId)
         .single()

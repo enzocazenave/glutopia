@@ -32,7 +32,7 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
   return (
     <div 
       style={{ 
-        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${restaurant.photo_url})`,
+        background: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${restaurant.photo_url})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
@@ -53,6 +53,11 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
           <Star width={16} color="#bbb" />
           <span className="text-white text-opacity-60 font-medium">{ restaurant.reviews_average.toFixed(2) }</span>
         </div>
+        {
+          restaurant.approximate_expense_average === 0.0 || restaurant.approximate_expense_average === 0 
+          ? null
+          : <p className="text-white text-opacity-60 font-medium">$ { restaurant.approximate_expense_average.toFixed(2) } promedio / persona</p>
+        }
       </div>
     </div>
   )
