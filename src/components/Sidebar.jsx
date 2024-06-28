@@ -1,16 +1,14 @@
 import { NavLink } from 'react-router-dom'
 import { AuthConstants, AuthContext } from '../context/AuthContext'
 import { Button } from './DesignSystem'
-import { useRef, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 
-export const Sidebar = ({ isOpen, setIsOpen }) => {
+export const Sidebar = ({ isOpen, setIsOpen, sidebarRef, menuRef }) => {
   const { status, handleOpenLoginModal, user } = useContext(AuthContext)
-
-  const sidebar = useRef(null)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (sidebar.current && !sidebar.current.contains(event.target)) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !menuRef.current.contains(event.target)) {
         setIsOpen(false)
       }
     }
@@ -35,7 +33,7 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
   }
 
   return (
-    <aside ref={sidebar} className={`flex flex-col justify-between max-sm:fixed max-sm:bg-[#f7fcf5] max-sm:p-4 max-sm:pb-8 z-50 left-0 max-sm:h-full max-sm:border-r-2 border-green-500 max-sm:shadow-xl ${isOpen ? '' : 'max-sm:hidden'}`}>
+    <aside ref={sidebarRef} className={`flex flex-col justify-between max-sm:fixed max-sm:bg-[#f7fcf5] max-sm:p-4 max-sm:pb-8 z-40 left-0 max-sm:h-full max-sm:border-r-2 border-green-500 max-sm:shadow-xl ${isOpen ? '' : 'max-sm:hidden'}`}>
       <div>
         <img className="mb-4 max-w-44" src="/logo.png" />
         <nav>

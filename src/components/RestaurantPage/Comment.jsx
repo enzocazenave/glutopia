@@ -19,7 +19,7 @@ export const Comment = ({ comment }) => {
   }
   
   return (
-    <div className="flex rounded-md border p-3 gap-3">
+    <div className="flex rounded-md p-3 gap-3 border bg-gradient-to-t from-green-50 to-transparent">
       <img src="/user.png" className="w-6 h-6" />
 
       <div className="flex flex-col w-full">
