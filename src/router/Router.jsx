@@ -10,7 +10,6 @@ const RestaurantPage = lazy(() => import('../pages/RestaurantPage'))
 const CommunityPage = lazy(() => import('../pages/CommunityPage'))
 const MapPage = lazy(() => import('../pages/MapPage'))
 const FrequentQuestionsPage = lazy(() => import ('../pages/FrequentQuestionsPage'))
-const SuggestRestaurantPage = lazy(() => import('../pages/SuggestRestaurantPage'))
 const UserPage = lazy(() => import('../pages/UserPage'))
 
 export const Router = () => {
@@ -37,7 +36,6 @@ export const Router = () => {
                   </ChatProvider>
                 } 
               />
-              <Route path="/sugerir" element={<SuggestRestaurantPage />} />
               <Route path="/cuenta" element={<UserPage />} />
             </>
           ) : null }

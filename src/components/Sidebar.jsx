@@ -57,9 +57,6 @@ export const Sidebar = ({ isOpen, setIsOpen, sidebarRef, menuRef }) => {
                     <NavLink to="/comunidad" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all `}>
                       Comunidad
                     </NavLink>
-                    <NavLink to="/sugerir" className={({ isActive }) => `${isActive ? 'font-semibold bg-green-300 p-2 rounded-md' : ''} hover:font-semibold transition-all `}>
-                      Sugerir restaurante
-                    </NavLink>
                   </>
                 )
                 : null

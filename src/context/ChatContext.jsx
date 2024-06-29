@@ -9,6 +9,7 @@ export const ChatProvider = ({ children }) => {
   const { user } = useContext(AuthContext)
   const [chatChannel, setChatChannel] = useState()
   const [messages, setMessages] = useState([])
+  const [highlightedMessages, setHighlightedMessages] = useState({})
   const [unviewedMessagesCount, setUnviewedMessagesCount] = useState(0)
   const scrollRef = useRef()
 
@@ -28,6 +29,30 @@ export const ChatProvider = ({ children }) => {
     }, 50)
   }
 
+  const getHighlightedMessages = async () => {    
+    try {
+      const { data, error } = await supabase
+        .from('highlighted_chat_messages')
+        .select('*, chat_messages(*, users(name))')
+        .eq('user_id', user.id)
+
+      if (error) {
+        return toast.error('Ocurrió un error inesperado')
+      }
+
+      const object = {}
+
+      data.forEach((message) => {
+        object[message.chat_message_id] = message
+      })
+
+      setHighlightedMessages(object)
+      scrollToBottom()
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   const getInitialConversations = async () => {
     if (messages.length) return
     
@@ -35,7 +60,6 @@ export const ChatProvider = ({ children }) => {
       const { data, error } = await supabase
         .from('chat_messages')
         .select('id, created_at, user_id, message, users(name)')
-        //.range(0, 49)
         .order('id', { ascending: false })
 
       if (error) {
@@ -51,6 +75,7 @@ export const ChatProvider = ({ children }) => {
 
   const joinChat = async() => {
     try {
+      await getHighlightedMessages()
       await getInitialConversations()
       setChatChannel(
         supabase.channel('realtime-chat')
@@ -78,7 +103,7 @@ export const ChatProvider = ({ children }) => {
   }
 
   return (
-    <ChatContext.Provider value={{ messages, scrollRef, unviewedMessagesCount }}>
+    <ChatContext.Provider value={{ messages, scrollRef, unviewedMessagesCount, getHighlightedMessages, highlightedMessages }}>
       {children}
     </ChatContext.Provider>
   )
