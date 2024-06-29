@@ -59,7 +59,7 @@ export const IncomingMessage = ({ id, name = '', sent_at = new Date(), message =
   }
 
   return (
-    <div className="flex gap-4 max-w-96 min-w-44">
+    <div className={`flex gap-4 min-w-44 max-w-[400px]`}>
       <img src={imgSrc} className="size-7" />
       <div onClick={() => setIsActionsOpen(prev => !prev)} className="bg-white p-2 rounded-md border hover:bg-green-100 cursor-pointer transition-colors">
         <header className="flex justify-between items-center gap-4">
@@ -68,18 +68,13 @@ export const IncomingMessage = ({ id, name = '', sent_at = new Date(), message =
         </header>
         <p className="text-sm">{message}</p>
       </div>
-      {
-        isActionsOpen 
-        ? (
-          <button onClick={handleClick}>
-            {isSaved
-              ? <FilledStar width={14} /> 
-              : <Star width={14} />
-            }
-          </button>
-        )
-        : null
-      }
+      
+      <button onClick={handleClick} className={`${isActionsOpen ? '' : 'invisible'}`}>
+        {isSaved
+          ? <FilledStar width={14} /> 
+          : <Star width={14} />
+        }
+      </button>
     </div>
   )
 }
