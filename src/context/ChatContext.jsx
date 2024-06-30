@@ -47,7 +47,6 @@ export const ChatProvider = ({ children }) => {
       })
 
       setHighlightedMessages(object)
-      scrollToBottom()
     } catch(error) {
       console.log(error)
     }
@@ -103,7 +102,7 @@ export const ChatProvider = ({ children }) => {
   }
 
   return (
-    <ChatContext.Provider value={{ messages, scrollRef, unviewedMessagesCount, getHighlightedMessages, highlightedMessages }}>
+    <ChatContext.Provider value={{ messages, scrollRef, scrollToBottom, unviewedMessagesCount, getHighlightedMessages, highlightedMessages, setHighlightedMessages }}>
       {children}
     </ChatContext.Provider>
   )
