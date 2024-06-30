@@ -99,9 +99,10 @@ const RestaurantPage = () => {
       <div className="flex gap-2">
         <span className="text-black text-opacity-50 font-medium">{restaurant?.reviews_count} comentarios - </span>
         <Star width={16} color="#bbb" />
-        <span className="text-black text-opacity-50 font-medium">{restaurant?.reviews_average?.toFixed(2)} - </span>
-        <span className="text-black text-opacity-50 font-medium">$ {restaurant?.approximate_expense_average?.toFixed(2)} promedio / persona</span>
+        <span className="text-black text-opacity-50 font-medium">{restaurant?.reviews_average?.toFixed(2)}</span>
       </div>
+
+      <span className="text-black text-opacity-50 font-medium">$ {restaurant?.approximate_expense_average?.toFixed(2)} promedio / persona</span>
 
       <div
         style={{
