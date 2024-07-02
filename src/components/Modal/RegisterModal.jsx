@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { useForm } from "../../hooks"
 import supabase from "../../supabaseClient"
+import toast from "react-hot-toast"
 
 const initialForm = {
   email: '',
