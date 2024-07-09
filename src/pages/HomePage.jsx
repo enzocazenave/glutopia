@@ -35,7 +35,7 @@ const HomePage = () => {
   })
 
   return (
-    <section className="fade-in row-span-1">
+    <section className="fade-in row-span-1 py-4 overflow-auto overflow-x-hidden">
       { loading ? <Loading /> : null }
       <RestaurantFilters 
         savedFilter={savedFilter} 

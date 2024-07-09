@@ -58,7 +58,7 @@ export const Layout = ({ children }) => {
   const menuRef = useRef(null)
 
   return (
-    <main className="grid grid-cols-[16rem_auto_20rem] max-w-[1280px] mx-auto py-4 gap-4 h-screen px-4 max-[1100px]:grid-cols-[16rem_auto] max-sm:grid-cols-1 max-sm:grid-rows-[auto_1fr]">
+    <main className="grid grid-cols-[16rem_auto_20rem] max-w-[1280px] mx-auto gap-4 h-screen max-[1100px]:grid-cols-[16rem_auto] max-sm:grid-cols-1 max-sm:grid-rows-[auto_1fr]">
       <SidebarMobile isOpen={isOpen} setIsOpen={setIsOpen} sidebarRef={sidebarRef} menuRef={menuRef} />
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} sidebarRef={sidebarRef} menuRef={menuRef} />
 

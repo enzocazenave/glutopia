@@ -33,7 +33,7 @@ export const Sidebar = ({ isOpen, setIsOpen, sidebarRef, menuRef }) => {
   }
 
   return (
-    <aside ref={sidebarRef} className={`flex flex-col justify-between max-sm:fixed max-sm:bg-[#f7fcf5] max-sm:p-4 max-sm:pb-8 z-40 left-0 max-sm:h-full max-sm:border-r-2 border-green-500 max-sm:shadow-xl ${isOpen ? '' : 'max-sm:hidden'}`}>
+    <aside ref={sidebarRef} className={`h-screen p-4 flex flex-col justify-between max-sm:fixed max-sm:bg-[#f7fcf5] max-sm:p-4 max-sm:pb-8 z-40 left-0 max-sm:h-full max-sm:border-r-2 border-green-500 max-sm:shadow-xl ${isOpen ? '' : 'max-sm:hidden'}`}>
       <div>
         <img className="mb-4 max-w-44" src="/logo.png" />
         <nav>

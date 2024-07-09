@@ -20,7 +20,7 @@ const FrequentQuestion = ({ title, description }) => {
 
 const FrequentQuestionsPage = () => {
   return (
-    <section className="fade-in flex flex-col gap-6 overflow-auto pb-6">
+    <section className="fade-in flex flex-col gap-6 overflow-auto pb-6 pt-4">
       <h2 className="text-lg font-semibold">Preguntas frecuentes</h2>
 
       <FrequentQuestion

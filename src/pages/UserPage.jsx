@@ -13,7 +13,7 @@ const UserPage = () => {
   }
 
   return (
-    <section className="fade-in flex flex-col gap-4">
+    <section className="fade-in flex flex-col gap-4 py-4">
       <div className="flex justify-between items-center">
         <h3 className="font-semibold">Tu cuenta</h3>
         <Button onClick={handleLogout}>Cerrar sesión</Button>

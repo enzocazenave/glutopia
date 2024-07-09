@@ -54,7 +54,7 @@ const CommunityPage = () => {
   }
 
   return (
-    <section className="flex flex-col gap-4 fade-in overflow-hidden">
+    <section className="flex flex-col gap-4 fade-in overflow-hidden py-4">
       <header className="flex gap-2">
         <button
           className={`max-sm:text-xs flex items-center gap-2 p-2 border rounded-md justify-center transition-colors hover:bg-green-100 flex-1 ${view === 'chat' ? 'bg-green-100' : 'bg-white'}`}

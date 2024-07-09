@@ -21,7 +21,7 @@ const MapPage = () => {
   }, [])
 
   return (
-    <section className="fade-in flex flex-col gap-2">
+    <section className="fade-in flex flex-col gap-2 py-4">
       <h2 className="text-lg font-semibold">Mapa</h2>
       <p>Si haces click en los marcadores rojos, podrás ver información sobre cada restaurant.</p>
       <div className="rounded-xl h-full overflow-hidden drop-shadow-xl">

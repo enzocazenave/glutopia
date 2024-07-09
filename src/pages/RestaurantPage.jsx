@@ -68,7 +68,7 @@ const RestaurantPage = () => {
   }
 
   return (
-    <section className="fade-in overflow-hidden flex flex-col gap-1">
+    <section className="fade-in overflow-hidden flex flex-col gap-1 py-4">
       <PdfViewer pdfUrl={menuUrl} displayPdf={displayPdf} setDisplayPdf={setDisplayPdf} />
       <Modal isModalOpen={isCommentModalOpen} handleCloseModal={handleCloseCommentModal}>
         <CommentModal resetComments={handleResetComments} handleCloseModal={handleCloseCommentModal} currentRestaurant={restaurant} />
