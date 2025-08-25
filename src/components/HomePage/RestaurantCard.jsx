@@ -51,12 +51,12 @@ export const RestaurantCard = ({ restaurant, setExecuteEffect }) => {
         <div className="flex gap-2">
           <span className="text-white text-opacity-60 font-medium">{ restaurant.reviews_count } comentarios - </span>
           <Star width={16} color="#bbb" />
-          <span className="text-white text-opacity-60 font-medium">{ restaurant.reviews_average.toFixed(2) }</span>
+          <span className="text-white text-opacity-60 font-medium">{ restaurant.reviews_average }</span>
         </div>
         {
           restaurant.approximate_expense_average === 0.0 || restaurant.approximate_expense_average === 0 
           ? null
-          : <p className="text-white text-opacity-60 font-medium">$ { restaurant.approximate_expense_average.toFixed(2) } promedio / persona</p>
+          : <p className="text-white text-opacity-60 font-medium">$ { restaurant.approximate_expense_average } promedio / persona</p>
         }
       </div>
     </div>

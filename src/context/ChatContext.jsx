@@ -33,7 +33,7 @@ export const ChatProvider = ({ children }) => {
     try {
       const { data, error } = await supabase
         .from('highlighted_chat_messages')
-        .select('*, chat_messages(*, users(name))')
+        .select('*, chat_messages(*, users!chat_messages_user_id_fkey(name))')
         .eq('user_id', user.id)
 
       if (error) {
@@ -58,7 +58,7 @@ export const ChatProvider = ({ children }) => {
     try {
       const { data, error } = await supabase
         .from('chat_messages')
-        .select('id, created_at, user_id, message, users(name)')
+        .select('id, created_at, user_id, message, users!chat_messages_user_id_fkey(name)')
         .order('id', { ascending: false })
 
       if (error) {

@@ -3,9 +3,9 @@ import supabase from "../supabaseClient"
 import { useEffect, useState } from "react"
 import { Marker } from "../components/MapPage"
 
-const MAP_API_KEY = "AIzaSyAF9CSzaZoKJ3r_9lYnkFD5yyb3hBK7b-U"
+const MAP_API_KEY = "AIzaSyAyoD6997cf3rC58kHCPNPGvqumyoPnqFs"
 const MAP_DEFAULTS_SETTINGS = {
-  mapId: "ddcc8c27c46533b8",
+  mapId: "8508d656ef1b688c8c5c2783",
   mapTypeControl: false,
   fullscreenControl: false,
   streetViewControl: false,
