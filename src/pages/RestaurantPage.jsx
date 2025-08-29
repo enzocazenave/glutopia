@@ -24,14 +24,35 @@ const RestaurantPage = () => {
   const [_, setReRender] = useState(false)
 
   useEffect(() => {
-    const { data, error } = supabase.storage.from('restaurants_menus').getPublicUrl(`pdf/restaurant-${restaurantIdParsed}.pdf`)
+    let cancelled = false
 
-    if (data.publicUrl) {
-      setMenuUrl(data.publicUrl)
-    } else {
-      setMenuUrl(null)
+    const loadMenu = async () => {
+      const path = `pdf/restaurant-${restaurantIdParsed}.pdf`
+      const { data } = supabase
+        .storage
+        .from('restaurants_menus')
+        .getPublicUrl(path)
+
+      const url = data.publicUrl
+
+      try {
+        const res = await fetch(url, { method: 'HEAD', cache: 'no-store' })
+        if (!cancelled) {
+          if (res.ok) {
+            setMenuUrl(url)
+          } else {
+            setMenuUrl(null)
+          }
+        }
+      } catch (err) {
+        if (!cancelled) setMenuUrl(null)
+      }
     }
-  }, [])
+
+    loadMenu()
+    return () => { cancelled = true }
+  }, [restaurantIdParsed])
+
 
   const handleSaveRestaurant = () => {
     const currentRestaurantsSaved = JSON.parse(window.localStorage.getItem('restaurants-saved') ?? '[]') ?? []
@@ -81,15 +102,11 @@ const RestaurantPage = () => {
           <button onClick={handleOpenCommentModalIfLogin} className="outline-none" title="Comentar">
             <MessageCircle width={20} />
           </button>
-          {menuUrl
-            ? (
-              <button onClick={handleOpenRestaurantMenu} className="outline-none" title="Ver menú">
-                <Menu width={20} />
-              </button>
-            )
-            : null
-          }
-
+          
+          <button onClick={handleOpenRestaurantMenu} className="outline-none" title="Ver menú">
+            <Menu width={20} />
+          </button>
+           
           <button onClick={handleSaveRestaurant} className="outline-none" title="Guardar">
             {isRestaurantSaved ? <FilledBookmark width={20} /> : <Bookmark width={20} />}
           </button>
